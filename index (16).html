@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30-Tage Darm-Challenge | remote_sisterhood</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal-50:#E1F5EE;--teal-100:#9FE1CB;--teal-200:#5DCAA5;
+  --teal-400:#1D9E75;--teal-600:#0F6E56;--teal-700:#0A5A45;--teal-800:#085041;--teal-900:#04342C;
+  --sage:#6B8F71;--sage-light:#B8D4BC;
+  --blush:#F2DDD5;--blush-mid:#E8C4B4;--blush-deep:#C4856A;
+  --amber-light:#FEF3E2;--amber:#F5A623;--amber-deep:#D4821A;
+  --lavender:#EDE8F5;--lavender-mid:#C5B8E8;--lavender-deep:#7B68C4;
+  --moss:#3D5A3E;--moss-light:#8FAF91;
+  --cream:#FDFAF5;--cream-dark:#F5F0E8;
+  --warm-white:#FEFCF8;
+  --text:#1C1C1A;--text-soft:#4A4A47;--text-muted:#706F6A;
+  --border:rgba(0,0,0,0.07);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;color:var(--text);background:var(--cream);font-weight:300;overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.15;}
+img{max-width:100%;}
+
+/* ── NAV ── */
+nav{
+  padding:16px 40px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(253,250,245,0.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(107,143,113,0.15);
+  position:sticky;top:0;z-index:100;
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--teal-800);text-decoration:none;font-style:italic;letter-spacing:0.3px;}
+.nav-cta{background:linear-gradient(135deg,var(--teal-700),var(--teal-900));color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:9px 22px;border-radius:24px;text-decoration:none;}
+@media(max-width:600px){nav{padding:14px 20px;}}
+
+/* ── HERO ── */
+.hero-wrap{
+  position:relative;overflow:hidden;
+  background:linear-gradient(150deg,#062218 0%,#0A3828 25%,#0D4A35 45%,#0A3020 65%,#061A10 85%,#030F08 100%);
+  min-height:95vh;display:flex;flex-direction:column;justify-content:center;
+}
+/* animated botanical overlay */
+.hero-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 50% at 85% 35%, rgba(29,158,117,0.22) 0%, transparent 60%),
+             radial-gradient(ellipse 35% 45% at 8% 75%, rgba(200,184,154,0.14) 0%, transparent 55%),
+             radial-gradient(ellipse 40% 30% at 50% 10%, rgba(93,202,165,0.07) 0%, transparent 50%),
+             radial-gradient(ellipse 25% 35% at 15% 30%, rgba(245,166,35,0.06) 0%, transparent 50%);
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:2;max-width:920px;margin:0 auto;padding:110px 40px 90px;display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#fff;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);padding:7px 18px;border-radius:24px;margin-bottom:24px;backdrop-filter:blur(4px);}
+.hero-wrap h1{font-size:clamp(44px,7vw,82px);color:#FFFFFF;margin-bottom:22px;font-style:italic;font-weight:300;line-height:1.06;text-shadow:0 2px 20px rgba(0,0,0,0.5);}
+.hero-wrap h1 strong{font-style:normal;color:#B8F0D8;display:block;font-weight:500;text-shadow:0 0 40px rgba(93,202,165,0.5);}
+.hero-sub{font-size:17px;color:rgba(255,255,255,0.85);margin-bottom:38px;font-weight:300;line-height:1.8;max-width:430px;}
+.btn-hero{display:inline-block;background:#fff;color:var(--teal-900);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;padding:15px 32px;border-radius:30px;text-decoration:none;box-shadow:0 4px 24px rgba(0,0,0,0.22);}
+.btn-ghost-hero{display:inline-block;color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;font-size:14px;padding:15px 16px;text-decoration:none;}
+
+/* symptom card */
+.symptom-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:30px 26px;backdrop-filter:blur(10px);}
+.symptom-title{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#9FE1CB;margin-bottom:20px;font-weight:500;}
+.symptom-list{list-style:none;}
+.symptom-list li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.07);font-size:14px;color:rgba(255,255,255,0.92);display:flex;gap:12px;align-items:center;font-weight:300;}
+.symptom-list li:last-child{border-bottom:none;}
+.symp-icon{width:24px;height:24px;background:rgba(29,158,117,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.symptom-foot{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);font-size:13px;font-style:italic;color:rgba(255,255,255,0.72);font-family:'Cormorant Garamond',serif;}
+
+/* hero SVG bg */
+.hero-svg-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+
+/* ── WAVE DIVIDER ── */
+.wave-divider{display:block;line-height:0;overflow:hidden;}
+.wave-divider svg{display:block;width:100%;}
+
+/* ── WHY SECTION — warm sage gradient ── */
+.why-section{
+  background:linear-gradient(160deg,#F8FFF8 0%,#EEF7EF 40%,#E4F2E5 100%);
+  padding:90px 0;position:relative;overflow:hidden;
+}
+.why-section::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(107,143,113,0.3),transparent);}
+.container{max-width:900px;margin:0 auto;padding:0 32px;}
+.overline{font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.overline::before{content:'';display:inline-block;width:28px;height:1.5px;border-radius:2px;}
+.section-title{font-size:clamp(34px,4.5vw,54px);margin-bottom:18px;}
+.section-lead{font-size:17px;max-width:580px;margin-bottom:48px;font-weight:300;line-height:1.8;}
+
+/* teal overline on light */
+.ov-teal{color:var(--teal-600);}
+.ov-teal::before{background:var(--teal-400);}
+/* blush overline */
+.ov-blush{color:var(--blush-deep);}
+.ov-blush::before{background:var(--blush-deep);}
+/* lavender */
+.ov-lav{color:var(--lavender-deep);}
+.ov-lav::before{background:var(--lavender-mid);}
+/* moss */
+.ov-moss{color:var(--moss);}
+.ov-moss::before{background:var(--moss-light);}
+/* amber */
+.ov-amber{color:var(--amber-deep);}
+.ov-amber::before{background:var(--amber);}
+
+.reasons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:660px){.reasons-grid{grid-template-columns:1fr;}}
+.reason-card{border-radius:16px;padding:26px 22px;position:relative;overflow:hidden;transition:transform 0.2s;}
+.reason-card:hover{transform:translateY(-2px);}
+.rc-1{background:linear-gradient(135deg,#fff 60%,#EEF7EF 100%);border:1px solid rgba(107,143,113,0.2);}
+.rc-2{background:linear-gradient(135deg,#FFF8F5 60%,#F5E8E0 100%);border:1px solid rgba(196,133,106,0.2);}
+.rc-3{background:linear-gradient(135deg,#F8F5FF 60%,#EDE8F5 100%);border:1px solid rgba(123,104,196,0.2);}
+.rc-4{background:linear-gradient(135deg,#FFFBF0 60%,#FEF3E2 100%);border:1px solid rgba(213,130,26,0.2);}
+.rc-5{background:linear-gradient(135deg,#F0FBF8 60%,#E1F5EE 100%);border:1px solid rgba(29,158,117,0.2);}
+.rc-6{background:linear-gradient(135deg,#F5F8FF 60%,#E8EEF8 100%);border:1px solid rgba(100,130,200,0.2);}
+.reason-glyph{font-size:28px;margin-bottom:12px;}
+.reason-card h4{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.4px;color:var(--text);}
+.reason-card p{font-size:13px;color:var(--text-muted);line-height:1.6;}
+
+/* ── MOON STRIP — deep gradient ── */
+.moon-strip{
+  background:linear-gradient(135deg,#0D2E22 0%,var(--teal-900) 35%,#1A3D5C 70%,#0F2A3A 100%);
+  padding:72px 0;overflow:hidden;position:relative;
+}
+.moon-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 50% 50%,rgba(29,158,117,0.12),transparent);pointer-events:none;}
+.moon-strip-inner{max-width:900px;margin:0 auto;padding:0 32px;}
+.moon-strip h2{font-size:clamp(26px,3.5vw,40px);color:#ffffff;margin-bottom:10px;font-style:italic;font-weight:300;}
+.moon-strip p{color:rgba(255,255,255,0.78);font-size:15px;font-weight:300;max-width:480px;line-height:1.75;}
+.moon-phases{display:flex;justify-content:space-between;align-items:center;margin-top:44px;}
+.moon-phase{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;}
+.moon-phase-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);text-align:center;font-family:'DM Sans',sans-serif;}
+.moon-connector{flex:1;height:1px;background:rgba(255,255,255,0.1);max-width:40px;}
+
+/* ── FOR WHOM — blush/warm ── */
+.forwho-section{
+  background:linear-gradient(160deg,#FEF9F7 0%,#F9EFE9 50%,#F5E8DF 100%);
+  padding:90px 0;position:relative;overflow:hidden;
+}
+.forwho-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px;}
+@media(max-width:600px){.forwho-grid{grid-template-columns:1fr;}}
+.forwho-box{border-radius:16px;padding:32px;}
+.forwho-yes{background:linear-gradient(135deg,#fff 0%,#F0FAF5 100%);border:1.5px solid rgba(29,158,117,0.2);}
+.forwho-no{background:linear-gradient(135deg,#fff 0%,#F8F8F5 100%);border:1.5px solid rgba(0,0,0,0.07);}
+.forwho-label{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;display:block;}
+.forwho-yes .forwho-label{color:var(--teal-600);}
+.forwho-no .forwho-label{color:var(--text-muted);}
+.forwho-list{list-style:none;}
+.forwho-list li{font-size:14px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,0.04);display:flex;gap:10px;align-items:flex-start;line-height:1.55;color:var(--text-soft);}
+.forwho-list li:last-child{border-bottom:none;}
+.forwho-arrow{color:var(--teal-400);flex-shrink:0;font-weight:600;margin-top:1px;}
+.forwho-dash{color:var(--text-muted);flex-shrink:0;margin-top:1px;}
+
+/* ── PHASES — lavender/mixed ── */
+.phases-section{
+  background:linear-gradient(160deg,#F2EFF8 0%,#EAE4F5 40%,#E4EEF8 100%);
+  padding:90px 0;position:relative;overflow:hidden;
+}
+.phases-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px;}
+@media(max-width:650px){.phases-row{grid-template-columns:1fr;}}
+.phase-card{border-radius:16px;padding:32px 26px;position:relative;overflow:hidden;}
+.phase-card.p1{background:linear-gradient(145deg,var(--teal-800),var(--teal-900));box-shadow:0 8px 32px rgba(8,80,65,0.25);}
+.phase-card.p2{background:linear-gradient(145deg,#fff,#F0FAF6);border:1.5px solid rgba(29,158,117,0.2);}
+.phase-card.p3{background:linear-gradient(145deg,#fff,#F5F2FF);border:1.5px solid rgba(123,104,196,0.15);}
+.phase-num{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;line-height:1;margin-bottom:6px;opacity:0.35;}
+.p1 .phase-num{color:#fff;}
+.p2 .phase-num{color:var(--teal-400);}
+.p3 .phase-num{color:var(--lavender-deep);}
+.phase-card h4{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;}
+.p1 h4{color:var(--teal-100);}
+.p2 h4{color:var(--teal-700);}
+.p3 h4{color:var(--lavender-deep);}
+.phase-card p{font-size:13px;line-height:1.65;}
+.p1 p{color:rgba(255,255,255,0.78);}
+.p2 p{color:var(--teal-600);}
+.p3 p{color:var(--text-muted);}
+.phase-pill{display:inline-block;font-size:10px;padding:4px 12px;border-radius:20px;margin-top:14px;font-weight:500;letter-spacing:0.5px;}
+.p1 .phase-pill{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);}
+.p2 .phase-pill{background:var(--teal-100);color:var(--teal-800);}
+.p3 .phase-pill{background:var(--lavender);color:var(--lavender-deep);}
+
+/* ── QUIZ — amber warm ── */
+.quiz-section{
+  background:linear-gradient(160deg,#FFFBF2 0%,#FEF3E2 50%,#FBE8C8 100%);
+  padding:90px 0;position:relative;overflow:hidden;
+}
+.quiz-card-wrap{max-width:640px;margin:0 auto;}
+.quiz-start-card{background:#fff;border-radius:20px;padding:44px 40px;text-align:center;box-shadow:0 4px 40px rgba(200,140,50,0.1);}
+.quiz-q-card{background:#fff;border-radius:20px;padding:40px;box-shadow:0 4px 40px rgba(200,140,50,0.1);}
+.quiz-r-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 40px rgba(200,140,50,0.1);}
+
+/* ── STORY — rich dark ── */
+.story-section{
+  background:linear-gradient(150deg,#1A2E1F 0%,#0D2417 40%,#071A10 70%,#03130A 100%);
+  padding:100px 0;overflow:hidden;position:relative;
+}
+.story-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 80% 50%,rgba(29,158,117,0.08),transparent),radial-gradient(ellipse 40% 40% at 10% 20%,rgba(200,184,154,0.06),transparent);pointer-events:none;}
+.story-inner{max-width:900px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:220px 1fr;gap:72px;align-items:start;position:relative;z-index:1;}
+@media(max-width:700px){.story-inner{grid-template-columns:1fr;gap:32px;}}
+.story-avatar-wrap{display:flex;flex-direction:column;align-items:center;gap:20px;}
+.story-avatar{width:190px;height:190px;border-radius:50%;background:linear-gradient(145deg,rgba(29,158,117,0.25),rgba(29,158,117,0.08));border:1.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;}
+.story-initials{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--teal-100);font-style:italic;}
+.story-moon-row{display:flex;gap:10px;align-items:center;}
+.story-ov{color:var(--teal-100);font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.story-ov::before{content:'';display:inline-block;width:28px;height:1.5px;background:var(--teal-400);border-radius:2px;}
+.story-text h2{font-size:clamp(30px,4vw,48px);color:#ffffff;margin-bottom:24px;font-style:italic;font-weight:300;}
+.story-text p{font-size:15px;color:rgba(255,255,255,0.78);margin-bottom:18px;font-weight:300;line-height:1.85;}
+.story-text p strong{color:rgba(255,255,255,0.96);font-weight:400;}
+.story-sig{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;color:var(--teal-100);margin-top:32px;line-height:1.4;}
+.story-sig span{display:block;font-size:12px;font-style:normal;font-family:'DM Sans',sans-serif;color:rgba(255,255,255,0.5);font-weight:300;letter-spacing:0.5px;margin-top:4px;}
+
+/* ── FINAL CTA — fresh gradient ── */
+.final-cta{
+  background:linear-gradient(150deg,#E8F7F1 0%,#D4EFE6 40%,#C4E8DC 100%);
+  padding:100px 0;text-align:center;position:relative;overflow:hidden;
+}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(29,158,117,0.08),transparent);pointer-events:none;}
+.final-cta h2{font-size:clamp(36px,5vw,60px);margin-bottom:18px;font-style:italic;font-weight:300;color:var(--teal-900);position:relative;z-index:1;}
+.final-cta p{color:var(--teal-700);font-size:16px;max-width:460px;margin:0 auto 40px;font-weight:300;position:relative;z-index:1;line-height:1.7;}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-teal{display:inline-block;background:linear-gradient(135deg,var(--teal-700),var(--teal-900));color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:14px 30px;border-radius:28px;text-decoration:none;box-shadow:0 4px 20px rgba(8,80,65,0.22);}
+.btn-wa{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:14px 26px;border-radius:28px;text-decoration:none;}
+.btn-outline{display:inline-block;border:1.5px solid var(--teal-400);color:var(--teal-700);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 26px;border-radius:28px;text-decoration:none;}
+
+/* footer */
+footer{background:var(--teal-900);color:rgba(255,255,255,0.55);padding:32px 40px;text-align:center;font-size:12px;line-height:1.8;}
+footer a{color:rgba(159,225,203,0.8);text-decoration:none;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:20px;color:rgba(255,255,255,0.7);margin-bottom:8px;display:block;font-style:italic;}
+
+/* disclaimer */
+.disclaimer{background:rgba(213,130,26,0.1);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;padding:14px 18px;margin-top:48px;}
+.disclaimer p{font-size:12px;color:var(--amber-deep);line-height:1.6;}
+
+/* quiz opt btn */
+.q-opt{width:100%;text-align:left;padding:14px 18px;border:1.5px solid #EEE;border-radius:12px;background:#FAFAF8;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:var(--text);cursor:pointer;transition:all 0.15s;line-height:1.45;margin-bottom:10px;}
+.q-opt:hover{border-color:var(--amber);background:var(--amber-light);}
+
+/* ═══════════════════════════════
+   MOBILE OPTIMIERUNG — < 768px
+   ═══════════════════════════════ */
+@media(max-width:768px){
+  nav{padding:14px 18px;}
+  .nav-logo{font-size:17px;}
+  .nav-cta{font-size:12px;padding:7px 14px;}
+  .hero-wrap{min-height:100svh;}
+  .hero-content{grid-template-columns:1fr!important;padding:80px 18px 48px!important;gap:28px!important;}
+  .hero-wrap h1{font-size:clamp(38px,10vw,54px)!important;margin-bottom:16px;}
+  .hero-sub{font-size:15px;margin-bottom:24px;max-width:100%;}
+  .hero-badge{font-size:10px;padding:6px 12px;}
+  .btn-hero{display:block;width:100%;text-align:center;padding:16px;font-size:16px;}
+  .btn-ghost-hero{display:block;text-align:center;padding:10px;}
+  .symptom-card{padding:20px 16px;}
+  .symptom-list li{font-size:13px;padding:8px 0;}
+  .symptom-foot{font-size:12px;}
+  .wave-divider svg{height:32px;}
+  section{padding:52px 0;}
+  .container{padding:0 18px;}
+  .section-title{font-size:clamp(26px,7.5vw,38px)!important;}
+  .section-lead{font-size:15px;margin-bottom:28px;}
+  .reasons-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .reason-card{padding:16px 13px;}
+  .reason-glyph{font-size:20px;margin-bottom:8px;}
+  .reason-card h4{font-size:11px;}
+  .reason-card p{font-size:12px;}
+  .moon-strip{padding:44px 0;}
+  .moon-strip-inner>div{grid-template-columns:1fr!important;gap:24px;}
+  .moon-strip h2{font-size:clamp(22px,6.5vw,30px);}
+  .moon-phases{gap:2px;}
+  .moon-connector{max-width:14px;}
+  .moon-phase svg{width:32px;height:32px;}
+  .moon-phase-label{font-size:9px;}
+  .forwho-section{padding:52px 0;}
+  .forwho-grid{grid-template-columns:1fr;gap:12px;}
+  .forwho-box{padding:20px 16px;}
+  .forwho-list li{font-size:13px;padding:7px 0;}
+  .phases-section{padding:52px 0;}
+  .phases-row{grid-template-columns:1fr;gap:12px;}
+  .phase-card{padding:22px 18px;}
+  .phase-num{font-size:48px;}
+  .quiz-section{padding:52px 0;}
+  .quiz-start-card{padding:28px 18px!important;}
+  .quiz-q-card{padding:24px 18px!important;}
+  .q-opt{padding:12px 14px;font-size:13px;margin-bottom:8px;}
+  .story-section{padding:56px 0;}
+  .story-inner{grid-template-columns:1fr!important;gap:24px!important;}
+  .story-avatar-wrap{flex-direction:row;align-items:center;gap:18px;}
+  .story-avatar{width:100px!important;height:100px!important;}
+  .story-initials{font-size:34px!important;}
+  .story-text h2{font-size:clamp(26px,7vw,36px);}
+  .story-text p{font-size:14px;}
+  .story-sig{font-size:19px;}
+  .final-cta{padding:56px 0;}
+  .final-cta h2{font-size:clamp(28px,7.5vw,42px);}
+  .final-cta p{font-size:15px;}
+  .cta-buttons{flex-direction:column;align-items:stretch;}
+  .btn-teal,.btn-wa,.btn-outline{text-align:center;justify-content:center;padding:15px 20px;width:100%;}
+  footer{padding:22px 18px;font-size:11px;}
+  footer .footer-logo{font-size:17px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">remote_sisterhood</a>
+  <a href="challenge.html" class="nav-cta">Zur Challenge →</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div class="hero-wrap">
+  <svg class="hero-svg-bg" viewBox="0 0 1440 920" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <!-- moon glow -->
+      <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(200,184,154,0.35)"/>
+        <stop offset="100%" stop-color="rgba(200,184,154,0)"/>
+      </radialGradient>
+      <!-- teal glow -->
+      <radialGradient id="tealGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(93,202,165,0.22)"/>
+        <stop offset="100%" stop-color="rgba(93,202,165,0)"/>
+      </radialGradient>
+      <!-- gold shimmer -->
+      <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(245,166,35,0.18)"/>
+        <stop offset="100%" stop-color="rgba(245,166,35,0)"/>
+      </radialGradient>
+    </defs>
+
+    <!-- ── FULL MOON — right upper ── -->
+    <circle cx="1270" cy="210" r="180" fill="url(#moonGlow)"/>
+    <circle cx="1270" cy="210" r="130" fill="rgba(200,184,154,0.12)"/>
+    <circle cx="1270" cy="210" r="128" fill="none" stroke="rgba(200,184,154,0.25)" stroke-width="1"/>
+    <circle cx="1270" cy="210" r="96" fill="rgba(200,184,154,0.09)"/>
+    <circle cx="1270" cy="210" r="94" fill="none" stroke="rgba(200,184,154,0.18)" stroke-width="0.6"/>
+    <!-- crescent mask to show crescent shape -->
+    <circle cx="1340" cy="210" r="130" fill="#06281D"/>
+    <!-- inner glow ring -->
+    <circle cx="1270" cy="210" r="50" fill="rgba(200,184,154,0.07)"/>
+    <!-- moon orbit dots -->
+    <g fill="rgba(200,184,154,0.5)">
+      <circle cx="1148" cy="148" r="2"/><circle cx="1140" cy="185" r="1.2"/>
+      <circle cx="1155" cy="270" r="1.5"/><circle cx="1180" cy="310" r="1"/>
+      <circle cx="1380" cy="90" r="1.5"/><circle cx="1400" cy="130" r="1"/>
+      <circle cx="1390" cy="300" r="1.2"/><circle cx="1370" cy="330" r="0.8"/>
+    </g>
+
+    <!-- ── TEAL GLOW — center-left, behind text ── -->
+    <ellipse cx="380" cy="460" rx="320" ry="260" fill="url(#tealGlow)"/>
+
+    <!-- ── GOLD ACCENT — bottom right ── -->
+    <ellipse cx="1100" cy="780" rx="220" ry="160" fill="url(#goldGlow)"/>
+
+    <!-- ── LARGE ORNAMENTAL MANDALA — right center ── -->
+    <g transform="translate(1180,600)" opacity="0.12">
+      <circle r="160" fill="none" stroke="rgba(200,184,154,1)" stroke-width="0.8"/>
+      <circle r="120" fill="none" stroke="rgba(200,184,154,1)" stroke-width="0.5"/>
+      <circle r="80" fill="none" stroke="rgba(200,184,154,1)" stroke-width="0.5"/>
+      <circle r="40" fill="none" stroke="rgba(200,184,154,1)" stroke-width="0.5"/>
+      <circle r="12" fill="rgba(200,184,154,0.5)"/>
+      <g stroke="rgba(200,184,154,1)" stroke-width="0.5">
+        <line x1="0" y1="-160" x2="0" y2="160"/>
+        <line x1="-160" y1="0" x2="160" y2="0"/>
+        <line x1="-113" y1="-113" x2="113" y2="113"/>
+        <line x1="113" y1="-113" x2="-113" y2="113"/>
+        <line x1="-60" y1="-152" x2="60" y2="152"/>
+        <line x1="60" y1="-152" x2="-60" y2="152"/>
+        <line x1="-152" y1="-60" x2="152" y2="60"/>
+        <line x1="152" y1="-60" x2="-152" y2="60"/>
+      </g>
+      <!-- 12 petal flower -->
+      <ellipse rx="60" ry="14" fill="none" stroke="rgba(200,184,154,0.8)" stroke-width="0.5"/>
+      <ellipse rx="60" ry="14" transform="rotate(30)" fill="none" stroke="rgba(200,184,154,0.8)" stroke-width="0.5"/>
+      <ellipse rx="60" ry="14" transform="rotate(60)" fill="none" stroke="rgba(200,184,154,0.8)" stroke-width="0.5"/>
+      <ellipse rx="60" ry="14" transform="rotate(90)" fill="none" stroke="rgba(200,184,154,0.8)" stroke-width="0.5"/>
+      <ellipse rx="60" ry="14" transform="rotate(120)" fill="none" stroke="rgba(200,184,154,0.8)" stroke-width="0.5"/>
+      <ellipse rx="60" ry="14" transform="rotate(150)" fill="none" stroke="rgba(200,184,154,0.8)" stroke-width="0.5"/>
+    </g>
+
+    <!-- ── SMALL ORNAMENT — top left ── -->
+    <g transform="translate(90,110)" opacity="0.15">
+      <circle r="50" fill="none" stroke="rgba(200,184,154,1)" stroke-width="0.7"/>
+      <circle r="34" fill="none" stroke="rgba(200,184,154,1)" stroke-width="0.4"/>
+      <g stroke="rgba(200,184,154,1)" stroke-width="0.4">
+        <line x1="0" y1="-50" x2="0" y2="50"/><line x1="-50" y1="0" x2="50" y2="0"/>
+        <line x1="-35" y1="-35" x2="35" y2="35"/><line x1="35" y1="-35" x2="-35" y2="35"/>
+      </g>
+      <circle r="6" fill="rgba(200,184,154,0.6)"/>
+    </g>
+
+    <!-- ── FEMININE SILHOUETTE — woman with arms raised, soft and flowing ── -->
+    <g opacity="0.07" transform="translate(870,80)">
+      <!-- head with hair -->
+      <ellipse cx="80" cy="52" rx="28" ry="32" fill="rgba(200,184,154,1)"/>
+      <!-- flowing hair left -->
+      <path d="M56,30 Q30,0 48,20 Q38,-10 62,12 Q52,-8 72,14" fill="rgba(200,184,154,1)"/>
+      <!-- flowing hair right -->
+      <path d="M104,30 Q130,0 112,20 Q122,-10 98,12 Q108,-8 88,14" fill="rgba(200,184,154,1)"/>
+      <!-- long hair behind -->
+      <path d="M56,55 Q30,120 40,200 Q55,180 60,120 Q60,85 80,84 Q100,85 100,120 Q105,180 120,200 Q130,120 104,55" fill="rgba(200,184,154,0.5)"/>
+      <!-- neck -->
+      <rect x="73" y="82" width="14" height="20" rx="4" fill="rgba(200,184,154,1)"/>
+      <!-- dress/body — flowing -->
+      <path d="M44,100 Q52,96 80,96 Q108,96 116,100 L124,230 Q116,238 80,238 Q44,238 36,230 Z" fill="rgba(200,184,154,1)"/>
+      <!-- flowing skirt -->
+      <path d="M36,230 Q16,290 24,370 Q44,400 80,398 Q116,400 136,370 Q144,290 124,230 Z" fill="rgba(200,184,154,1)"/>
+      <!-- left arm raised high and open -->
+      <path d="M44,112 Q10,80 -20,34 Q-14,28 -8,32 Q18,72 46,122" fill="rgba(200,184,154,1)"/>
+      <!-- right arm raised high and open -->
+      <path d="M116,112 Q150,80 180,34 Q174,28 168,32 Q142,72 114,122" fill="rgba(200,184,154,1)"/>
+      <!-- small detail lines — fabric -->
+      <path d="M60,140 Q80,136 100,140" stroke="rgba(200,184,154,0.4)" stroke-width="1" fill="none"/>
+      <path d="M50,170 Q80,164 110,170" stroke="rgba(200,184,154,0.4)" stroke-width="1" fill="none"/>
+    </g>
+
+    <!-- ── STAR FIELD ── -->
+    <g fill="rgba(255,255,255,0.6)">
+      <circle cx="290" cy="70" r="1.4"/><circle cx="430" cy="38" r="0.9"/>
+      <circle cx="560" cy="90" r="1.2"/><circle cx="700" cy="52" r="1.5"/>
+      <circle cx="840" cy="78" r="0.8"/><circle cx="170" cy="55" r="1"/>
+      <circle cx="520" cy="860" r="1.2"/><circle cx="380" cy="830" r="0.9"/>
+      <circle cx="260" cy="880" r="1.4"/><circle cx="650" cy="870" r="0.7"/>
+    </g>
+    <!-- dim stars -->
+    <g fill="rgba(255,255,255,0.25)">
+      <circle cx="340" cy="120" r="0.8"/><circle cx="490" cy="62" r="0.6"/>
+      <circle cx="615" cy="110" r="0.7"/><circle cx="760" cy="88" r="0.9"/>
+    </g>
+
+    <!-- ── BOTANICAL stems bottom-left ── -->
+    <g stroke="rgba(93,202,165,0.22)" stroke-width="1.2" fill="none" stroke-linecap="round">
+      <path d="M0,780 Q55,720 100,785"/>
+      <path d="M0,830 Q45,775 82,835"/>
+      <path d="M15,880 Q65,830 100,882"/>
+      <path d="M0,920 Q50,876 88,920"/>
+      <!-- leaf shapes -->
+      <path d="M45,760 Q60,720 55,760 Q72,715 68,758"/>
+      <path d="M30,800 Q48,760 44,800 Q60,758 56,798"/>
+    </g>
+    <!-- teal botanical top-left corner -->
+    <g stroke="rgba(93,202,165,0.15)" stroke-width="0.9" fill="none" stroke-linecap="round">
+      <path d="M0,40 Q60,10 90,55"/>
+      <path d="M0,70 Q50,38 75,80"/>
+      <path d="M10,10 Q55,0 75,35"/>
+      <!-- leaf -->
+      <path d="M30,20 Q50,-5 44,22 Q65,-2 58,24"/>
+    </g>
+    <!-- botanical right edge -->
+    <g stroke="rgba(200,184,154,0.15)" stroke-width="0.9" fill="none" stroke-linecap="round">
+      <path d="M1440,580 Q1395,530 1365,582"/>
+      <path d="M1440,630 Q1402,584 1372,634"/>
+      <path d="M1440,680 Q1408,638 1380,686"/>
+      <path d="M1440,730 Q1410,690 1384,734"/>
+    </g>
+
+    <!-- ── FLOATING PARTICLES — golden dust ── -->
+    <g fill="rgba(245,166,35,0.35)">
+      <circle cx="200" cy="400" r="1.5"/><circle cx="160" cy="350" r="0.8"/>
+      <circle cx="240" cy="470" r="1"/><circle cx="175" cy="440" r="0.6"/>
+      <circle cx="220" cy="300" r="1.2"/><circle cx="145" cy="320" r="0.7"/>
+    </g>
+
+    <!-- ── DECORATIVE ARCH — framing the headline area ── -->
+    <path d="M80,540 Q80,200 420,160" fill="none" stroke="rgba(200,184,154,0.08)" stroke-width="1"/>
+    <path d="M60,560 Q60,190 440,148" fill="none" stroke="rgba(200,184,154,0.05)" stroke-width="0.5"/>
+  </svg>
+
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">
+        <svg width="10" height="10" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/><circle cx="10" cy="10" r="3" fill="rgba(255,255,255,0.7)"/></svg>
+        30-Tage Darm-Challenge
+      </div>
+      <h1 style="color:#ffffff;text-shadow:0 2px 20px rgba(0,0,0,0.6);">Viele Symptome.<br><strong style="color:#B8F0D8;font-weight:500;">Eine Wurzel.</strong></h1>
+      <p class="hero-sub">Müdigkeit, Blähbauch, Hautirritationen, Energielosigkeit — oft suchen wir die Lösung dort, wo das Symptom sichtbar ist. Dabei liegt die Antwort häufig tiefer: im Darm.</p>
+      <a href="challenge.html" class="btn-hero">Zur 30-Tage-Challenge →</a>
+      <a href="#warum" class="btn-ghost-hero">Mehr erfahren ↓</a>
+    </div>
+    <div class="symptom-card">
+      <p class="symptom-title">Erkennst du dich wieder?</p>
+      <ul class="symptom-list">
+        <li><span class="symp-icon">😴</span>Morgens schon müde aufwachen</li>
+        <li><span class="symp-icon">⚡</span>Energielosigkeit durch den Tag</li>
+        <li><span class="symp-icon">💨</span>Blähbauch nach dem Essen</li>
+        <li><span class="symp-icon">✨</span>Hautirritationen ohne Ursache</li>
+        <li><span class="symp-icon">🍫</span>Heisshunger auf Süsses & Koffein</li>
+        <li><span class="symp-icon">🔄</span>Das Gefühl, nie wirklich fit zu sein</li>
+      </ul>
+      <p class="symptom-foot">Wenn du drei davon kennst, könnte dein Darm der Schlüssel sein.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WAVE -->
+<div class="wave-divider" style="background:linear-gradient(160deg,#F8FFF8,#EEF7EF);">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:60px;">
+    <path d="M0,0 Q360,60 720,30 Q1080,0 1440,50 L1440,0 Z" fill="#051C14"/>
+  </svg>
+</div>
+
+<!-- ══ WARUM ══ -->
+<section class="why-section" id="warum">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="overline ov-teal">Warum der Darm?</div>
+    <h2 class="section-title" style="color:var(--teal-900);">Der Darm — Ursprung<br>von so vielem.</h2>
+    <p class="section-lead" style="color:var(--text-soft);">Bis zu 70 % der Immunzellen sitzen im Darm. Er produziert über 90 % des Serotonins und kommuniziert direkt mit deinem Nervensystem. Wer seine Energie, Haut und Stimmung verstehen will — schaut zuerst hier hin.</p>
+
+    <div class="reasons-grid">
+      <div class="reason-card rc-1">
+        <div class="reason-glyph">⚡</div>
+        <h4>Energie & Fokus</h4>
+        <p>Ein gestörtes Mikrobiom beeinträchtigt die Nährstoffaufnahme — selbst bei gesunder Ernährung.</p>
+      </div>
+      <div class="reason-card rc-2">
+        <div class="reason-glyph">🌸</div>
+        <h4>Haut & Ausstrahlung</h4>
+        <p>Darm und Haut sind direkt verbunden. Viele Hautprobleme haben eine innere Ursache.</p>
+      </div>
+      <div class="reason-card rc-3">
+        <div class="reason-glyph">🧠</div>
+        <h4>Stimmung & Wohlbefinden</h4>
+        <p>Über 90 % des Serotonins entsteht im Darm. Die Darm-Hirn-Achse ist bidirektional.</p>
+      </div>
+      <div class="reason-card rc-4">
+        <div class="reason-glyph">🛡️</div>
+        <h4>Immunsystem</h4>
+        <p>Ein grosser Teil der Immunabwehr sitzt im Darm. Vielfalt im Mikrobiom = bessere Abwehr.</p>
+      </div>
+      <div class="reason-card rc-5">
+        <div class="reason-glyph">⚖️</div>
+        <h4>Gewicht & Stoffwechsel</h4>
+        <p>Darmbakterien beeinflussen, wie Kalorien verwertet werden. Das ist kein Mythos.</p>
+      </div>
+      <div class="reason-card rc-6">
+        <div class="reason-glyph">🌙</div>
+        <h4>Schlaf & Regeneration</h4>
+        <p>Darmgesundheit beeinflusst die Melatoninproduktion und damit die Schlafqualität.</p>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <p>Diese Inhalte dienen der allgemeinen Information und ersetzen keine medizinische Beratung. Nahrungsergänzungsmittel sind kein Ersatz für eine ausgewogene Ernährung.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MOON STRIP ══ -->
+<div class="moon-strip">
+  <div class="moon-strip-inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+      <div>
+        <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(159,225,203,0.8);margin-bottom:14px;font-weight:500;">Rhythmus & Zyklus</div>
+        <h2>Dein Körper folgt<br>einem Rhythmus.</h2>
+        <p style="margin-top:14px;">Der Mondzyklus, dein Hormonzyklus, dein Darm — alles ist verbunden. Wenn du lernst, auf deinen Körper zu hören, verändert sich alles.</p>
+      </div>
+      <div class="moon-phases">
+        <div class="moon-phase">
+          <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="rgba(255,255,255,0.06)" stroke="rgba(200,184,154,0.3)" stroke-width="1"/></svg>
+          <span class="moon-phase-label">Neumond</span>
+        </div>
+        <div class="moon-connector"></div>
+        <div class="moon-phase">
+          <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="rgba(255,255,255,0.05)" stroke="rgba(200,184,154,0.2)" stroke-width="1"/><path d="M23,3 A20,20 0 0,1 23,43 A11,20 0 0,0 23,3" fill="rgba(200,184,154,0.55)"/></svg>
+          <span class="moon-phase-label">Zunehmend</span>
+        </div>
+        <div class="moon-connector"></div>
+        <div class="moon-phase">
+          <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="rgba(200,184,154,0.65)" stroke="rgba(200,184,154,0.4)" stroke-width="1"/><circle cx="23" cy="23" r="20" fill="none" stroke="rgba(200,184,154,0.2)" stroke-width="5"/></svg>
+          <span class="moon-phase-label">Vollmond</span>
+        </div>
+        <div class="moon-connector"></div>
+        <div class="moon-phase">
+          <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="rgba(255,255,255,0.05)" stroke="rgba(200,184,154,0.2)" stroke-width="1"/><path d="M23,3 A20,20 0 0,0 23,43 A11,20 0 0,1 23,3" fill="rgba(200,184,154,0.55)"/></svg>
+          <span class="moon-phase-label">Abnehmend</span>
+        </div>
+        <div class="moon-connector"></div>
+        <div class="moon-phase">
+          <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="rgba(255,255,255,0.03)" stroke="rgba(200,184,154,0.15)" stroke-width="1"/></svg>
+          <span class="moon-phase-label">Ruhe</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FÜR WEN ══ -->
+<section class="forwho-section" id="fuerwen">
+  <div class="container">
+    <div class="overline ov-blush">Für wen</div>
+    <h2 class="section-title" style="color:#3D1F15;">Diese Challenge ist<br>für dich, wenn…</h2>
+    <p class="section-lead" style="color:#6B4035;">Kein Programm passt für alle — lies kurz nach, ob das hier das Richtige für dich ist.</p>
+    <div class="forwho-grid">
+      <div class="forwho-box forwho-yes">
+        <span class="forwho-label">Das passt ✓</span>
+        <ul class="forwho-list">
+          <li><span class="forwho-arrow">→</span>Du dich regelmässig müde und energielos fühlst, ohne klaren Grund</li>
+          <li><span class="forwho-arrow">→</span>Blähungen, Druckgefühl oder unregelmässige Verdauung dein Alltag sind</li>
+          <li><span class="forwho-arrow">→</span>Deine Haut unruhig ist und du die Ursache noch nicht gefunden hast</li>
+          <li><span class="forwho-arrow">→</span>Du weisst, dass deine Ernährung Potenzial hat — und bereit bist, es zu nutzen</li>
+          <li><span class="forwho-arrow">→</span>Du persönliche Begleitung schätzt und nicht allein starten willst</li>
+          <li><span class="forwho-arrow">→</span>Du offen bist für schrittweise Veränderung — ohne radikale Diäten</li>
+        </ul>
+      </div>
+      <div class="forwho-box forwho-no">
+        <span class="forwho-label">Lieber nicht, wenn…</span>
+        <ul class="forwho-list">
+          <li><span class="forwho-dash">–</span>Du schwanger bist oder stillst — bitte zuerst ärztlichen Rat einholen</li>
+          <li><span class="forwho-dash">–</span>Du eine diagnostizierte Darmerkrankung hast — hier vorher mit dem Arzt sprechen</li>
+          <li><span class="forwho-dash">–</span>Du eine schnelle Lösung ohne Eigenverantwortung suchst</li>
+          <li><span class="forwho-dash">–</span>Du nicht bereit bist, deine Ernährung auch nur ein bisschen zu überdenken</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PHASES ══ -->
+<section class="phases-section">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="overline ov-lav">Was dich erwartet</div>
+    <h2 class="section-title" style="color:#2D1E5A;">30 Tage. Drei Phasen.<br>Ein klares Ziel.</h2>
+    <p class="section-lead" style="color:var(--text-muted);">Strukturiert, begleitet, nachhaltig. Kein Crash, keine Verbote — sondern ein echtes Fundament.</p>
+    <div class="phases-row">
+      <div class="phase-card p1">
+        <div class="phase-num">9</div>
+        <h4>Tage C9</h4>
+        <p>Der Einstieg. Aloe Vera Gel, Shakes, Therm und Fiber als Basis. Persönliche Begleitung durch alle 9 Tage.</p>
+        <span class="phase-pill">Phase 1</span>
+      </div>
+      <div class="phase-card p2">
+        <div class="phase-num">21</div>
+        <h4>Tage Aufbau</h4>
+        <p>Aloe Vera Gel, Active Pro B und Forever Fiber werden zur Routine. Das Mikrobiom festigt sich.</p>
+        <span class="phase-pill">Phase 2</span>
+      </div>
+      <div class="phase-card p3">
+        <div class="phase-num">∞</div>
+        <h4>Danach</h4>
+        <p>30 Tage konsequent — und du merkst den Unterschied. Das Ziel ist eine Routine, die bleibt.</p>
+        <span class="phase-pill">Langfristig</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:44px;">
+      <a href="challenge.html" class="btn-teal">Zum vollständigen 30-Tage-Plan →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUIZ ══ -->
+<section class="quiz-section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="overline ov-amber" style="justify-content:center;">Selbsttest</div>
+      <h2 class="section-title" style="color:#3D2200;">Wie fit ist dein Darm?</h2>
+      <p style="color:var(--amber-deep);font-size:16px;max-width:460px;margin:0 auto;font-weight:300;line-height:1.7;">7 Fragen · 2 Minuten · dein persönliches Ergebnis mit konkretem nächsten Schritt.</p>
+    </div>
+    <div class="quiz-card-wrap" id="quiz-wrap">
+
+      <!-- Progress -->
+      <div id="quiz-progress" style="margin-bottom:24px;display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-size:12px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;">Frage <span id="q-current">1</span> von 7</span>
+          <span style="font-size:12px;color:var(--amber-deep);font-weight:500;" id="q-pct">0 %</span>
+        </div>
+        <div style="background:rgba(213,130,26,0.15);border-radius:20px;height:5px;overflow:hidden;">
+          <div id="q-bar" style="height:100%;background:linear-gradient(90deg,var(--amber),var(--amber-deep));border-radius:20px;transition:width 0.4s ease;width:0%;"></div>
+        </div>
+      </div>
+
+      <!-- Start -->
+      <div id="quiz-start" class="quiz-start-card">
+        <div style="font-size:52px;margin-bottom:20px;">🌿</div>
+        <h3 style="font-size:28px;margin-bottom:14px;font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--text);">Kennst du deinen Darm?</h3>
+        <p style="font-size:15px;color:var(--text-muted);margin-bottom:30px;line-height:1.75;font-weight:300;">Beantworte 7 kurze Fragen zu deinem Wohlbefinden und erfahre, wie dein Darm gerade aufgestellt ist.</p>
+        <button onclick="startQuiz()" style="background:linear-gradient(135deg,var(--amber),var(--amber-deep));color:#fff;border:none;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;padding:14px 34px;border-radius:28px;cursor:pointer;box-shadow:0 4px 20px rgba(213,130,26,0.3);">Quiz starten →</button>
+        <p style="font-size:11px;color:var(--text-light);margin-top:14px;">Kein Login · Kein E-Mail · Ergebnis erscheint sofort</p>
+      </div>
+
+      <!-- Question -->
+      <div id="quiz-question" style="display:none;" class="quiz-q-card">
+        <p id="q-text" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--text);margin-bottom:26px;line-height:1.4;"></p>
+        <div id="q-options"></div>
+      </div>
+
+      <!-- Result -->
+      <div id="quiz-result" style="display:none;" class="quiz-r-card">
+        <div id="result-header" style="padding:36px;text-align:center;">
+          <div id="result-emoji" style="font-size:52px;margin-bottom:16px;"></div>
+          <div id="result-badge" style="display:inline-block;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;padding:5px 16px;border-radius:20px;margin-bottom:14px;"></div>
+          <h3 id="result-title" style="font-size:26px;font-family:'Cormorant Garamond',serif;font-weight:400;margin-bottom:12px;"></h3>
+          <p id="result-text" style="font-size:15px;line-height:1.75;font-weight:300;max-width:460px;margin:0 auto;color:var(--text-soft);"></p>
+        </div>
+        <div style="padding:0 36px 36px;">
+          <div style="background:#FAFAF8;border-radius:12px;padding:20px;margin-bottom:22px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+              <span style="font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);">Darm-Fitness-Score</span>
+              <span id="score-num" style="font-size:12px;font-weight:500;color:var(--teal-600);"></span>
+            </div>
+            <div style="background:#EEE;border-radius:20px;height:8px;overflow:hidden;">
+              <div id="score-fill" style="height:100%;border-radius:20px;transition:width 1s ease;width:0%;"></div>
+            </div>
+          </div>
+          <div id="result-tips" style="margin-bottom:26px;"></div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <a href="challenge.html" style="flex:1;min-width:150px;display:inline-block;background:linear-gradient(135deg,var(--teal-700),var(--teal-900));color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:13px 20px;border-radius:28px;text-decoration:none;text-align:center;box-shadow:0 4px 16px rgba(8,80,65,0.2);">Zur 30-Tage-Challenge →</a>
+            <a href="https://wa.me/41768163836" target="_blank" style="flex:1;min-width:150px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:13px 20px;border-radius:28px;text-decoration:none;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.552 4.103 1.513 5.827L0 24l6.335-1.652C8.05 23.35 9.983 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.98 0-3.818-.6-5.347-1.618l-.383-.227-3.762.986 1.006-3.667-.249-.396C2.18 15.227 1.636 13.678 1.636 12 1.636 6.558 6.558 1.636 12 1.636S22.364 6.558 22.364 12 17.442 22.364 12 22.364z"/></svg>
+              Sabine fragen
+            </a>
+          </div>
+          <button onclick="resetQuiz()" style="background:none;border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text-light);cursor:pointer;margin-top:16px;text-decoration:underline;">Quiz wiederholen</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ STORY ══ -->
+<div class="story-section">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+    <circle cx="1350" cy="350" r="240" fill="none" stroke="rgba(93,202,165,0.06)" stroke-width="1"/>
+    <circle cx="1350" cy="350" r="160" fill="none" stroke="rgba(93,202,165,0.04)" stroke-width="0.5"/>
+    <g fill="rgba(200,184,154,0.15)"><circle cx="700" cy="70" r="1.5"/><circle cx="740" cy="50" r="1"/><circle cx="770" cy="80" r="0.8"/><circle cx="680" cy="95" r="1.2"/></g>
+    <g stroke="rgba(93,202,165,0.1)" stroke-width="0.8" fill="none"><path d="M0,500 Q60,450 100,520"/><path d="M0,560 Q50,510 85,570"/><path d="M15,610 Q70,565 105,620"/></g>
+  </svg>
+  <div class="story-inner">
+    <div class="story-avatar-wrap">
+      <div class="story-avatar">
+        <span class="story-initials">SK</span>
+      </div>
+      <div class="story-moon-row">
+        <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgba(200,184,154,0.15)" stroke="rgba(200,184,154,0.35)" stroke-width="1"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgba(200,184,154,0.1)" stroke="rgba(200,184,154,0.3)" stroke-width="1"/><path d="M12,2 A10,10 0 0,1 12,22 A6,10 0 0,0 12,2" fill="rgba(200,184,154,0.55)"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgba(200,184,154,0.6)" stroke="rgba(200,184,154,0.4)" stroke-width="1"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgba(200,184,154,0.1)" stroke="rgba(200,184,154,0.3)" stroke-width="1"/><path d="M12,2 A10,10 0 0,0 12,22 A6,10 0 0,1 12,2" fill="rgba(200,184,154,0.55)"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgba(200,184,154,0.04)" stroke="rgba(200,184,154,0.2)" stroke-width="1"/></svg>
+      </div>
+    </div>
+    <div class="story-text">
+      <div class="story-ov">Meine Geschichte</div>
+      <h2>Ich kenne das Gefühl.</h2>
+      <p>Ich war lange Zeit die Frau, die morgens aufstand und schon müde war. Die sich durch den Tag kämpfte — mit dem dritten Kaffee, dem Stück Schokolade um 15 Uhr, dem leisen Gedanken: <strong>«Irgendwas stimmt nicht.»</strong></p>
+      <p>Ich habe zu viel Kaffee getrunken und zu viel Süsses gegessen — beides Zeichen dafür, dass mein Körper nach schneller Energie suchte, die er eigentlich aus einer gesunden Verdauung hätte bekommen sollen. Ich habe das Symptom behandelt, nicht die Ursache.</p>
+      <p>Als ich anfing, mich intensiv mit Darmgesundheit zu beschäftigen, hat sich mein Blick auf meinen Körper grundlegend verändert. <strong>Nicht als Wunderlösung — sondern als ehrlicher Einstieg, hinzuschauen.</strong></p>
+      <p>Die 30-Tage-Challenge ist das, womit ich selbst gestartet habe. Ich begleite dich — weil ich weiss, dass die ersten 9 Tage die entscheidenden sind.</p>
+      <p class="story-sig">Sabine Kaya<span>Forever Living Partnerin · Basel / DACH</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FINAL CTA ══ -->
+<div class="final-cta">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMid slice">
+    <g transform="translate(720,250)" opacity="0.06">
+      <ellipse rx="100" ry="24" fill="none" stroke="#085041" stroke-width="0.8"/>
+      <ellipse rx="100" ry="24" transform="rotate(30)" fill="none" stroke="#085041" stroke-width="0.8"/>
+      <ellipse rx="100" ry="24" transform="rotate(60)" fill="none" stroke="#085041" stroke-width="0.8"/>
+      <ellipse rx="100" ry="24" transform="rotate(90)" fill="none" stroke="#085041" stroke-width="0.8"/>
+      <ellipse rx="100" ry="24" transform="rotate(120)" fill="none" stroke="#085041" stroke-width="0.8"/>
+      <ellipse rx="100" ry="24" transform="rotate(150)" fill="none" stroke="#085041" stroke-width="0.8"/>
+      <circle r="280" fill="none" stroke="#085041" stroke-width="0.4"/>
+    </g>
+    <g stroke="#085041" stroke-width="0.7" fill="none" opacity="0.07">
+      <path d="M100,100 Q140,60 170,110"/><path d="M80,140 Q115,100 140,150"/>
+      <path d="M1340,100 Q1300,60 1270,110"/><path d="M1360,140 Q1325,100 1300,150"/>
+    </g>
+  </svg>
+  <div class="container">
+    <div class="overline ov-moss" style="justify-content:center;">Bereit?</div>
+    <h2>Starte deine 30 Tage.</h2>
+    <p>Schau dir den vollständigen Plan an — oder schreib mir direkt, wenn du Fragen hast oder einen Starttermin möchtest.</p>
+    <div class="cta-buttons">
+      <a href="challenge.html" class="btn-teal">Zum 30-Tage-Plan →</a>
+      <a href="https://wa.me/41768163836" class="btn-wa" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.552 4.103 1.513 5.827L0 24l6.335-1.652C8.05 23.35 9.983 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.98 0-3.818-.6-5.347-1.618l-.383-.227-3.762.986 1.006-3.667-.249-.396C2.18 15.227 1.636 13.678 1.636 12 1.636 6.558 6.558 1.636 12 1.636S22.364 6.558 22.364 12 17.442 22.364 12 22.364z"/></svg>
+        Sabine fragen
+      </a>
+      <a href="https://www.instagram.com/remote_sisterhood" class="btn-outline" target="_blank">@remote_sisterhood</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">remote_sisterhood</span>
+  <p>© Sabine Kaya · Basel / DACH · <a href="https://www.instagram.com/remote_sisterhood">Instagram</a> · <a href="https://thealoeveraco.shop/dlL0TBic">Forever Living Shop</a></p>
+  <p style="margin-top:10px;max-width:580px;margin-left:auto;margin-right:auto;">Alle Angaben dienen der allgemeinen Information. Keine Heilversprechen. Nahrungsergänzungsmittel ersetzen keine ausgewogene Ernährung und keine medizinische Beratung.</p>
+</footer>
+
+<script>
+const questions=[
+  {text:"Wie fühlst du dich morgens, wenn du aufwachst?",options:[{text:"Ausgeruht und voller Energie",score:3},{text:"Geht so — ich brauche eine Weile zum Anlaufen",score:2},{text:"Müde, als hätte ich kaum geschlafen",score:1},{text:"Erschöpft — der Wecker ist mein Feind",score:0}]},
+  {text:"Wie oft hast du nach dem Essen ein Blähgefühl oder Druckgefühl?",options:[{text:"Selten bis nie",score:3},{text:"Manchmal, bei bestimmten Speisen",score:2},{text:"Ziemlich oft — fast täglich",score:1},{text:"Fast nach jeder Mahlzeit",score:0}]},
+  {text:"Wie würdest du dein Energielevel tagsüber beschreiben?",options:[{text:"Gleichmässig gut — keine grossen Einbrüche",score:3},{text:"Okay morgens, nachmittags brauche ich Koffein",score:2},{text:"Auf und ab — ich lebe von Kaffee und Süssem",score:1},{text:"Chronisch niedrig — ich schleppe mich durch den Tag",score:0}]},
+  {text:"Wie ist deine Haut aktuell?",options:[{text:"Klar und gepflegt, ohne besondere Probleme",score:3},{text:"Gelegentlich unrein, aber meistens okay",score:2},{text:"Öfter Rötungen, Unreinheiten oder trockene Stellen",score:1},{text:"Regelmässig Hautirritationen, die mich beschäftigen",score:0}]},
+  {text:"Wie sieht deine Verdauung aus?",options:[{text:"Regelmässig und problemlos",score:3},{text:"Meistens gut, gelegentlich träge",score:2},{text:"Unregelmässig — manchmal tagelang wenig, dann viel",score:1},{text:"Ständig Probleme — Verstopfung, Durchfall oder beides",score:0}]},
+  {text:"Wie viel Wasser trinkst du täglich (ohne Kaffee, Säfte, Alkohol)?",options:[{text:"Mehr als 2 Liter",score:3},{text:"1,5 bis 2 Liter",score:2},{text:"Unter 1,5 Liter — ich vergesse es oft",score:1},{text:"Kaum — ich trinke lieber Kaffee oder Tee",score:0}]},
+  {text:"Wie würdest du deine Ernährung ehrlich beschreiben?",options:[{text:"Viel Gemüse, wenig Verarbeitetes — ich achte bewusst drauf",score:3},{text:"Ganz okay — mit Ausreissern",score:2},{text:"Viel Fertiggerichte, wenig Zeit zum Kochen",score:1},{text:"Viel Zucker und Koffein, wenig Gemüse",score:0}]}
+];
+const results=[
+  {range:[0,7],emoji:"⚠️",badge:"Handlungsbedarf",badgeBg:"#FCEBEB",badgeColor:"#501313",headerBg:"#FFF5F5",title:"Dein Darm braucht jetzt deine Aufmerksamkeit.",text:"Deine Antworten zeigen deutliche Signale, dass dein Verdauungssystem aus dem Gleichgewicht geraten ist. Das sind keine Zufälle — das ist ein Ruf nach mehr Unterstützung. Genau dafür ist diese Challenge gemacht.",barColor:"#E05555",tips:["Starte mit kleinen Schritten: Wasser erhöhen, Zucker reduzieren","Dein Darm braucht Struktur — die 30-Tage-Challenge gibt ihr einen Rahmen","Meld dich bei Sabine — gemeinsam ist der Start einfacher"]},
+  {range:[8,13],emoji:"🌱",badge:"Wachstumspotenzial",badgeBg:"#FAEEDA",badgeColor:"#633806",headerBg:"#FFFBF0",title:"Du bist auf dem Weg — aber noch nicht am Ziel.",text:"Du machst vieles schon richtig, spürst aber regelmässig, dass etwas nicht ganz stimmt. Mit gezielter Unterstützung kannst du hier wirklich viel herausholen.",barColor:"#D4870B",tips:["Integriere täglich fermentierte Lebensmittel (Naturjoghurt, Sauerkraut)","Deine Ballaststoffzufuhr könnte erhöht werden — Forever Fiber hilft","Die 30-Tage-Challenge gibt dir einen klaren Plan"]},
+  {range:[14,18],emoji:"✦",badge:"Gute Basis",badgeBg:"#E1F5EE",badgeColor:"#085041",headerBg:"#F0FAF6",title:"Dein Darm ist auf einem guten Weg.",text:"Deine Gewohnheiten zeigen, dass du bereits auf deinen Körper achtest. Aber auch ein gut funktionierender Darm profitiert von gezielter Pflege — besonders was das Mikrobiom betrifft.",barColor:"#1D9E75",tips:["Fokus: Mikrobiom aktiv aufbauen mit Active Pro B","Aloe Vera Gel morgens nüchtern ist ein starker nächster Schritt","Die Challenge festigt dein bereits gutes Fundament"]},
+  {range:[19,21],emoji:"🌿",badge:"Stark aufgestellt",badgeBg:"#EAF3DE",badgeColor:"#27500A",headerBg:"#F4FAF0",title:"Beeindruckend — dein Darm liebt dich.",text:"Du lebst bereits sehr bewusst und dein Körper dankt es dir. Auch auf diesem Niveau lohnt es sich, das Mikrobiom aktiv zu pflegen — Prävention ist die wirkungsvollste Form der Gesundheitsförderung.",barColor:"#3B6D11",tips:["Erhalt deiner Routinen ist dein grösster Vorteil","Ergänze mit Probiotika zur langfristigen Mikrobiom-Pflege","Teile dein Wissen — andere Frauen brauchen genau das"]}
+];
+let cQ=0,score=0;
+function startQuiz(){document.getElementById('quiz-start').style.display='none';document.getElementById('quiz-progress').style.display='block';document.getElementById('quiz-question').style.display='block';showQ();}
+function showQ(){const q=questions[cQ];const pct=Math.round((cQ/questions.length)*100);document.getElementById('q-current').textContent=cQ+1;document.getElementById('q-pct').textContent=pct+' %';document.getElementById('q-bar').style.width=pct+'%';document.getElementById('q-text').textContent=q.text;const opts=document.getElementById('q-options');opts.innerHTML='';q.options.forEach(o=>{const b=document.createElement('button');b.className='q-opt';b.textContent=o.text;b.onclick=()=>pick(o.score,b,opts);opts.appendChild(b);});}
+function pick(s,btn,container){Array.from(container.children).forEach(b=>{b.disabled=true;b.style.opacity='0.45';});btn.style.borderColor='var(--amber)';btn.style.background='var(--amber-light)';btn.style.opacity='1';score+=s;setTimeout(()=>{cQ++;if(cQ<questions.length){showQ();}else{showResult();}},350);}
+function showResult(){document.getElementById('quiz-progress').style.display='none';document.getElementById('quiz-question').style.display='none';const r=results.find(x=>score>=x.range[0]&&score<=x.range[1])||results[0];const pct=Math.round((score/21)*100);document.getElementById('result-emoji').textContent=r.emoji;document.getElementById('result-header').style.background=r.headerBg;const badge=document.getElementById('result-badge');badge.textContent=r.badge;badge.style.background=r.badgeBg;badge.style.color=r.badgeColor;document.getElementById('result-title').textContent=r.title;document.getElementById('result-text').textContent=r.text;document.getElementById('score-num').textContent=pct+' / 100';document.getElementById('score-fill').style.background=r.barColor;document.getElementById('result-tips').innerHTML='<p style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">Deine nächsten Schritte</p>'+r.tips.map(t=>`<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #F0EDE8;font-size:14px;color:var(--text-soft);line-height:1.55;"><span style="color:var(--teal-400);font-weight:600;flex-shrink:0;">→</span>${t}</div>`).join('');document.getElementById('quiz-result').style.display='block';setTimeout(()=>{document.getElementById('score-fill').style.width=pct+'%';},100);}
+function resetQuiz(){cQ=0;score=0;document.getElementById('quiz-result').style.display='none';document.getElementById('quiz-progress').style.display='block';document.getElementById('quiz-question').style.display='block';showQ();}
+</script>
+</body>
+</html>
